@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purti Ladani — Business Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-100: #CECBF6;
+    --purple-200: #AFA9EC;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --purple-900: #26215C;
+    --gray-50: #F1EFE8;
+    --gray-100: #D3D1C7;
+    --gray-200: #B4B2A9;
+    --gray-400: #888780;
+    --gray-600: #5F5E5A;
+    --gray-900: #2C2C2A;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F7F6FF;
+    color: var(--gray-900);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+    background: rgba(247,246,255,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--purple-100);
+  }
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--purple-800);
+    letter-spacing: 0.02em;
+  }
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+  nav ul a {
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gray-600); text-decoration: none; transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--purple-600); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 4rem;
+    align-items: center;
+    padding: 6rem 10% 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 50vw; height: 50vw;
+    background: radial-gradient(ellipse, var(--purple-100) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--purple-600);
+    background: var(--purple-50);
+    border: 1px solid var(--purple-200);
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--purple-900);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--purple-600); }
+  .hero-subtitle {
+    font-size: 1rem; color: var(--gray-600);
+    max-width: 480px; margin-bottom: 2.5rem; line-height: 1.85;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--purple-600); color: white;
+    padding: 0.8rem 2rem; border-radius: 100px;
+    text-decoration: none; font-size: 0.88rem; font-weight: 500;
+    transition: background 0.2s, transform 0.15s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--purple-800); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--purple-800);
+    padding: 0.8rem 2rem; border: 1.5px solid var(--purple-400);
+    border-radius: 100px; text-decoration: none;
+    font-size: 0.88rem; font-weight: 500;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--purple-50); transform: translateY(-2px); }
+
+  /* HERO PHOTO */
+  .hero-photo-wrap {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-photo-frame {
+    position: relative;
+    width: 360px; height: 420px;
+  }
+  .hero-photo-frame::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 20px; right: -20px; bottom: -20px;
+    border: 2px solid var(--purple-200);
+    border-radius: 20px;
+    z-index: 0;
+  }
+  .hero-photo-frame img {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    border-radius: 16px;
+    filter: saturate(0.9);
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: -16px; left: -16px; z-index: 2;
+    background: var(--purple-600);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 12px;
+    font-size: 0.78rem; font-weight: 500;
+    line-height: 1.4;
+    box-shadow: 0 4px 20px rgba(83,74,183,0.35);
+  }
+  .hero-badge span { display: block; font-size: 1.1rem; font-weight: 600; }
+
+  /* SECTIONS */
+  section { padding: 6rem 10%; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-400); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 300; color: var(--purple-900);
+    line-height: 1.15; margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about { background: white; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+  .about-text p {
+    font-size: 1rem; color: var(--gray-600);
+    line-height: 1.9; margin-bottom: 1.2rem;
+  }
+  .about-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .info-card {
+    background: var(--purple-50);
+    border: 1px solid var(--purple-100);
+    border-radius: 12px; padding: 1.2rem 1.5rem;
+  }
+  .info-card-label {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--purple-400); margin-bottom: 0.35rem;
+  }
+  .info-card-value { font-size: 0.92rem; color: var(--purple-800); font-weight: 500; }
+  .info-card-value a { color: var(--purple-600); text-decoration: none; }
+  .info-card-value a:hover { text-decoration: underline; }
+
+  /* SKILLS */
+  .skills { background: var(--purple-900); }
+  .skills .section-label { color: var(--purple-200); }
+  .skills .section-title { color: white; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .skill-group {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 1.8rem;
+  }
+  .skill-group h3 {
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple-200); margin-bottom: 1.2rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .skill-tag {
+    font-size: 0.8rem; color: white;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px; padding: 0.28rem 0.8rem;
+  }
+
+  /* EXPERIENCE */
+  .experience { background: white; }
+  .exp-timeline { position: relative; padding-left: 2.5rem; }
+  .exp-timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0.5rem; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--purple-400), var(--purple-100));
+  }
+  .exp-item { position: relative; padding-bottom: 3.5rem; }
+  .exp-item:last-child { padding-bottom: 0; }
+  .exp-dot {
+    position: absolute; left: -2.5rem; top: 0.4rem;
+    width: 10px; height: 10px;
+    background: var(--purple-600);
+    border: 2px solid white; border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--purple-200);
+  }
+  .exp-date {
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple-400); margin-bottom: 0.4rem;
+  }
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem; font-weight: 600;
+    color: var(--purple-900); margin-bottom: 0.15rem;
+  }
+  .exp-company { font-size: 0.88rem; font-weight: 500; color: var(--gray-600); margin-bottom: 1rem; }
+  .exp-achievements { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .exp-achievements li {
+    font-size: 0.9rem; color: var(--gray-600);
+    padding-left: 1.2rem; position: relative; line-height: 1.7;
+  }
+  .exp-achievements li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--purple-400); font-size: 0.85rem;
+  }
+
+  /* PROJECTS */
+  .projects { background: var(--gray-50); }
+  .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .project-card {
+    background: white;
+    border: 1px solid var(--gray-100);
+    border-radius: 16px; padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(83,74,183,0.12); }
+  .project-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--purple-600), var(--purple-200));
+  }
+  .project-icon {
+    width: 44px; height: 44px;
+    background: var(--purple-50);
+    border: 1px solid var(--purple-100);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 1.2rem;
+  }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--purple-900); margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .project-desc { font-size: 0.85rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 1.2rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
+  .project-tag {
+    font-size: 0.72rem; font-weight: 500;
+    background: var(--purple-50); color: var(--purple-800);
+    border: 1px solid var(--purple-100);
+    border-radius: 100px; padding: 0.2rem 0.7rem;
+  }
+  .project-link {
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--purple-600); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+  }
+  .project-link:hover { color: var(--purple-800); }
+
+  /* EDUCATION */
+  .education { background: white; }
+  .edu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .edu-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 14px; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .edu-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--purple-400), var(--purple-200));
+  }
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--purple-900); margin-bottom: 0.5rem; line-height: 1.3;
+  }
+  .edu-school { font-size: 0.85rem; font-weight: 500; color: var(--purple-600); margin-bottom: 0.35rem; }
+  .edu-year { font-size: 0.75rem; color: var(--gray-400); letter-spacing: 0.08em; }
+  .edu-courses {
+    margin-top: 1rem; padding-top: 1rem;
+    border-top: 1px solid var(--gray-100);
+    font-size: 0.78rem; color: var(--gray-600); line-height: 1.7;
+  }
+
+  /* CERTIFICATIONS */
+  .certifications { background: var(--gray-50); }
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 1rem; }
+  .cert-card {
+    background: white;
+    border: 1px solid var(--gray-100);
+    border-radius: 10px; padding: 1.1rem 1.3rem;
+    display: flex; align-items: flex-start; gap: 0.8rem;
+  }
+  .cert-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    background: var(--purple-600); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.02em; text-align: center;
+  }
+  .cert-name { font-size: 0.83rem; font-weight: 500; color: var(--purple-800); line-height: 1.45; }
+
+
+  .resume-section { background: var(--gray-50); }
+
+  /* CONTACT */
+  .contact {
+    background: linear-gradient(135deg, var(--purple-900) 0%, #1A1540 100%);
+    text-align: center;
+  }
+  .contact .section-label { color: var(--purple-200); }
+  .contact .section-title { color: white; }
+  .contact-text {
+    font-size: 1rem; color: rgba(255,255,255,0.55);
+    max-width: 440px; margin: -1.5rem auto 2.5rem;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.75rem 1.6rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px; color: white; text-decoration: none;
+    font-size: 0.87rem; font-weight: 400;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.05);
+  }
+  .contact-link:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+  }
+  .contact-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  footer {
+    background: #0D0B20; text-align: center;
+    padding: 1.6rem; font-size: 0.76rem; color: rgba(255,255,255,0.25);
+  }
+
+  @media (max-width: 960px) {
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 6% 4rem; }
+    .hero-photo-wrap { display: none; }
+    section { padding: 4rem 6%; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .skills-grid, .projects-grid, .edu-grid { grid-template-columns: 1fr; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero h1      { animation: fadeUp 0.6s 0.15s ease both; }
+  .hero-subtitle{ animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-cta     { animation: fadeUp 0.6s 0.45s ease both; }
+  .hero-photo-wrap { animation: fadeUp 0.8s 0.2s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">PL</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Open to opportunities &bull; Toronto, ON</span>
+    <h1>Purti<br><em>Ladani</em></h1>
+    <p class="hero-subtitle">Aspiring Business Analyst with a strong foundation in requirements analysis, stakeholder engagement, and data reporting — bridging business needs and analytical insights.</p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <img src="profile_photo.jpg" alt="Purti Ladani" />
+      <div class="hero-badge">
+        Business Analyst<br><span>Mohawk College</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+
+
+
+<!-- PROJECTS -->
+
+
+<!-- CERTIFICATIONS -->
+
+
+<!-- SKILLS -->
+
+
+<!-- EDUCATION -->
+
+
+<!-- EXPERIENCE -->
+
+
+<!-- CONTACT -->
+<section class="about" id="about">
+  <div class="section-label">About Me</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2 class="section-title" style="margin-bottom:1.5rem">Turning complexity<br>into <em style="font-style:italic;color:var(--purple-600)">clarity</em></h2>
+      <p>I hold a Graduate Certificate in Business Analysis &amp; Cyber Security from Mohawk College and a B.Tech in Computer Engineering. I recently completed a Business Analyst internship at Mohawk College, analyzing stakeholder requirements, producing business reports, and validating healthcare analytics datasets aligned to BABOK guidelines.</p>
+      <p>My approach combines structured analytical thinking with strong communication skills. Whether facilitating workshops, creating process diagrams, or delivering executive presentations, I translate complex requirements into actionable insights that drive real decisions.</p>
+    </div>
+    <div class="about-info">
+      <div class="info-card">
+        <div class="info-card-label">Location</div>
+        <div class="info-card-value">Toronto, Ontario, Canada</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Email</div>
+        <div class="info-card-value"><a href="mailto:purtiladani1002@gmail.com">purtiladani1002@gmail.com</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">LinkedIn</div>
+        <div class="info-card-value"><a href="https://www.linkedin.com/in/purtiladani" target="_blank">linkedin.com/in/purtiladani</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">GitHub</div>
+        <div class="info-card-value"><a href="https://github.com/purtiladani1002" target="_blank">github.com/purtiladani1002</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Focus Areas</div>
+        <div class="info-card-value">Requirements Analysis &middot; Business Analysis &middot; Risk Management &middot; Agile</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="experience" id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-date">Aug 2025 &ndash; Oct 2025</div>
+      <div class="exp-role">Jr. Business Analyst Intern</div>
+      <div class="exp-company">Mohawk College</div>
+      <ul class="exp-achievements">
+        <li>Analyzed 12 stakeholder and process documents, producing requirements notes aligned to BABOK guidelines using structured document analysis and stakeholder engagement.</li>
+        <li>Prepared 6 business reports, stakeholder maps, workflows, and process models &mdash; improving planning clarity by 30% using Lucidchart and BRD documentation.</li>
+        <li>Delivered 4 project status updates and 2 recorded video presentations, securing 100% on-time sponsor feedback via Microsoft Teams.</li>
+        <li>Supported data preparation and quality checks on 3 healthcare analytics datasets, reducing data issues by 20% using Excel validation and Power BI profiling.</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-date">Aug 2025</div>
+      <div class="exp-role">Team Lead</div>
+      <div class="exp-company">Mohawk College (Academic Project)</div>
+      <ul class="exp-achievements">
+        <li>Led a team of 4 through a simulated client workshop, capturing 25 requirements with 90% completeness using facilitation techniques and stakeholder mapping.</li>
+        <li>Interviewed 6 stakeholders to document 18 functional and 7 non-functional requirements with 100% traceability using a structured BRD template.</li>
+        <li>Presented a 12-slide pitch to faculty achieving an 85% evaluation score through clear storytelling, prioritization rationale, and visual process models.</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-date">Jun 2024 &ndash; Present</div>
+      <div class="exp-role">Dairy Frozen Associate</div>
+      <div class="exp-company">Walmart</div>
+      <ul class="exp-achievements">
+        <li>Managed daily replenishment across 200 SKUs, improving on-shelf availability by 10% through disciplined inventory checks and backroom organization.</li>
+        <li>Organized stock rotation across 3 temperature-controlled sections, reducing expired items by 15% using FIFO practices and compliance checks.</li>
+        <li>Assisted 40+ customers per shift, increasing satisfaction scores by 8% through rapid issue resolution and clear communication.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="projects" id="projects">
+  <div class="section-label">GitHub Portfolio</div>
+  <h2 class="section-title">Analytical Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">&#128200;</div>
+      <div class="project-title">Sales Performance Tracker</div>
+      <div class="project-desc">Analyzed 100 sales records across 4 regions and 5 salespersons. Built an interactive dashboard with Pivot Tables, Charts, and Slicers to surface key performance trends.</div>
+      <div class="project-tags">
+        <span class="project-tag">Excel</span>
+        <span class="project-tag">Pivot Tables</span>
+        <span class="project-tag">Data Visualization</span>
+      </div>
+      <a href="https://github.com/purtiladani1002/BA-DA-Analytics-Portfolio/tree/main/Excel-Project-1-Sales-Tracker" target="_blank" class="project-link">View on GitHub &#8599;</a>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">&#128184;</div>
+      <div class="project-title">Budget vs Actuals Dashboard</div>
+      <div class="project-desc">Analyzed $1M+ in spending across 6 departments and 20 categories. Built variance analysis with conditional formatting and KPI cards for executive reporting.</div>
+      <div class="project-tags">
+        <span class="project-tag">Excel</span>
+        <span class="project-tag">KPI Analysis</span>
+        <span class="project-tag">Variance Analysis</span>
+      </div>
+      <a href="https://github.com/purtiladani1002/BA-DA-Analytics-Portfolio/tree/main/Excel-Project-2-Budget-Actuals" target="_blank" class="project-link">View on GitHub &#8599;</a>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">&#128193;</div>
+      <div class="project-title">Customer Orders Database</div>
+      <div class="project-desc">Built a relational database with 4 tables and 15 SQL queries covering SELECT, JOIN, GROUP BY, Subqueries, UPDATE, and VIEWs for order analytics.</div>
+      <div class="project-tags">
+        <span class="project-tag">SQL</span>
+        <span class="project-tag">SQLite</span>
+        <span class="project-tag">Relational DB</span>
+      </div>
+      <a href="https://github.com/purtiladani1002/BA-DA-Analytics-Portfolio/tree/main/SQL-Project-Customer-Orders" target="_blank" class="project-link">View on GitHub &#8599;</a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="https://github.com/purtiladani1002/BA-DA-Analytics-Portfolio" target="_blank" class="btn-outline">View Full Repository &#8599;</a>
+  </div>
+</section>
+<section class="certifications" id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-grid">
+    <div class="cert-card"><div class="cert-icon">PBI</div><div class="cert-name">Data Visualization in Power BI</div></div>
+    
+    <div class="cert-card"><div class="cert-icon">PY</div><div class="cert-name">Python for Data Science</div></div>
+    <div class="cert-card"><div class="cert-icon">EDT</div><div class="cert-name">Enterprise Design Thinking Practitioner</div></div>
+    <div class="cert-card"><div class="cert-icon">BPI</div><div class="cert-name">Business Process Improvement</div></div>
+    <div class="cert-card"><div class="cert-icon">AC</div><div class="cert-name">Access 2019 Essential Training</div></div>
+    <div class="cert-card"><div class="cert-icon">JR</div><div class="cert-name">Learning Jira Software &mdash; LinkedIn Learning</div></div>
+  </div>
+</section>
+<section class="skills" id="skills">
+  <div class="section-label">Expertise</div>
+  <h2 class="section-title">Skills &amp; Tools</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Business Analysis</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Requirements Analysis</span>
+        <span class="skill-tag">BRD Documentation</span>
+        <span class="skill-tag">Stakeholder Mapping</span>
+        <span class="skill-tag">Process Modelling</span>
+        <span class="skill-tag">Quality Assurance</span>
+        <span class="skill-tag">Risk Management</span>
+        <span class="skill-tag">BABOK Guidelines</span>
+        <span class="skill-tag">Agile / Scrum</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Tools &amp; Software</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Microsoft Excel</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Jira</span>
+        <span class="skill-tag">Confluence</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Lucidchart</span>
+        <span class="skill-tag">ServiceNow</span>
+        <span class="skill-tag">Wireshark</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Soft Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Analytical Thinking</span>
+        <span class="skill-tag">Communication</span>
+        <span class="skill-tag">Problem-Solving</span>
+        <span class="skill-tag">Attention to Detail</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Team Collaboration</span>
+        <span class="skill-tag">Adaptability</span>
+        <span class="skill-tag">Time Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="education" id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">Graduate Certificate &mdash; Business Analysis</div>
+      <div class="edu-school">Mohawk College, Toronto, ON</div>
+      <div class="edu-year">Jan 2025 &ndash; Oct 2025</div>
+      <div class="edu-courses">Project Management &middot; Requirements Analysis &middot; Strategy Analysis &middot; Quality Assurance</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Graduate Certificate &mdash; Cyber Security Analytics</div>
+      <div class="edu-school">Mohawk College, Toronto, ON</div>
+      <div class="edu-year">Jan 2024 &ndash; Aug 2024</div>
+      <div class="edu-courses">Security Operations &middot; Asset Security &middot; Identity &amp; Access Management &middot; Network Security</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech &mdash; Computer Engineering</div>
+      <div class="edu-school">LDRP University, Gandhinagar, India</div>
+      <div class="edu-year">2019 &ndash; 2023</div>
+      <div class="edu-courses">Data Structures &middot; Operating Systems &middot; Software Engineering &middot; Database Systems &middot; Computer Networks</div>
+    </div>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2 class="section-title">Get In Touch</h2>
+  <p class="contact-text">Open to Business Analyst roles, internships, and collaborative opportunities. Let's talk.</p>
+  <div class="contact-links">
+    <a href="mailto:purtiladani1002@gmail.com" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      purtiladani1002@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/purtiladani" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/purtiladani1002/BA-DA-Analytics-Portfolio" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+</section>
+
+<footer>&copy; 2026 Purti Ladani &mdash; Portfolio</footer>
+
+</body>
+</html>
